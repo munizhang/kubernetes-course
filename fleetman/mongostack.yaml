@@ -1,0 +1,38 @@
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec: 
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.6-xenial
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: fleetman-mongodb
+spec: 
+  #  This defines which pods are going to e represensed by this Service
+  # The service becomes a network endport for either other services 
+  # or maybe external users to connect to (eg. browser)
+  selector:
+    app: mongodb
+  ports:
+    - name: mongoports
+      port: 27017
+  type: ClusterIP
+
+
