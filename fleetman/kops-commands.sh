@@ -10,3 +10,4 @@ kops edit ig nodes --name ${NAME}
 kops get ig --name ${NAME} ## verify the instance groups
 kops update cluster --name ${NAME}
 kops validate cluster
+kubectl logs <pod-name>
