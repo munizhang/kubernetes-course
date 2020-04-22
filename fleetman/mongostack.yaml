@@ -15,9 +15,20 @@ spec:
         app: mongodb
     spec:
       containers:
-      - name: mongodb
-        image: mongo:3.6-xenial
-  
+        - name: mongodb
+          image: mongo:3.6-xenial
+          volumeMounts:
+            - name: mongo-persistent-storage
+              mountPath: /data/db
+      volumes:
+        - name: mongo-persistent-storage
+          # hostPath:
+            # path: /mnt/some/directory/structure
+            # type: DirectoryOrCreate
+          # pointer to the configuration of HOW we want the mount to be implemented
+          persistentVolumeClaim:
+            claimName: mongo-pvc  
+
 ---
 
 apiVersion: v1

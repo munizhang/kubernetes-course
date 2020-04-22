@@ -1,0 +1,27 @@
+# localstorage mongo-pvc what do we want?
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessMode:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+
+--- 
+# How do we want it implemented? 
+# storage should be larger than the one on PVC
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage
+spec: 
+  capacity:
+    storage: 20Gi
+  accessMode:
+    - ReadWriteOnce
+  hostPath:
+    path: /mnt/somenew/directory/structure
+    type: DiretoryOrCreate
