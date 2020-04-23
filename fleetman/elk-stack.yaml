@@ -185,8 +185,6 @@ roleRef:
   name: elasticsearch-logging
   apiGroup: ""
 ---
-
-#StatefulSet - similar to replication set but need stable name
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -245,12 +243,10 @@ spec:
         name: elasticsearch-logging-init
         securityContext:
           privileged: true
-  #Extra: the original container is memoery only
   volumeClaimTemplates:
   - metadata:
       name: elasticsearch-logging
     spec:
-  # the storageClassName needs to match storage class name
       storageClassName: cloud-ssd
       accessModes: [ "ReadWriteOnce" ]
       resources:
