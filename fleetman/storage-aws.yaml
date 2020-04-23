@@ -13,6 +13,7 @@ spec:
 
 --- 
 # How do we want it implemented? 
+# autoscaling
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
