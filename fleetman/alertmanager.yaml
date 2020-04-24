@@ -1,5 +1,6 @@
 global:
-  slack_api_url: 'url'
+  slack_api_url: '<<add your slack endpoint here>>'
+route:
   group_by: ['alertname']
   group_wait: 5s
   group_interval: 1m
