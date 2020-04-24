@@ -1,0 +1,8 @@
+# How do we want it implemented
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: efk-elasticsearch-file
+  namespace: efk
+reclaimPolicy: Retain
+provisioner: kubernetes.io/azure-file
