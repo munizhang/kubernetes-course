@@ -1,0 +1,52 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: new-joinier
+rules:
+- apiGroups: ["", "apps","autoscaling", "extensions"] #Blank - Core API . "*" Everything
+  resources: ["*"] # pods,services. NOT deployments
+  verbs: ["get", "list", "watch"]
+
+
+---
+
+kind: ClusterRoleBinding
+apiVersion: rbac.authoirzation.k8s.io/v1
+metadata: 
+  name: put-specific-user-or-users-into-new-joinier-role
+  namespace: default
+subjects: 
+# list users that are going to the role
+- kind: User
+  name: francis-linux-login-name
+roleRef:
+  kind: ClusterRole
+  name: new-joiner
+  apiGroup: rbac.authoirzation.k8s.io
+
+---
+
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: new-joinier
+  namespace: playground
+rules:
+- apiGroups: ["",  "extensions"] #Blank - Core API . "*" Everything
+  resources: ["*"] # pods,services. NOT deployments
+  verbs: ["*"]
+---
+
+kind: RoleBinding
+apiVersion: rbac.authoirzation.k8s.io/v1
+metadata: 
+  name: new-joiners-role-binding
+  namespace: playygroun
+subjects: 
+# list users that are going to the role
+- kind: User
+  name: francis-linux-login-name
+roleRef:
+  kind: Role
+  name: new-joiner
+  apiGroup: rbac.authoirzation.k8s.io
